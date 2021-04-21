@@ -5,7 +5,20 @@ import 'package:DevQuiz/shared/widgets/progress_indication/progress_indication_w
 import 'package:flutter/material.dart';
 
 class QuizCardWidget extends StatelessWidget {
-  const QuizCardWidget({Key? key}) : super(key: key);
+  final String title;
+  final int finish;
+  final int all;
+
+  QuizCardWidget({
+    Key? key,
+    required this.title,
+    this.all = 10,
+    this.finish = 0,
+  }) : super(key: key);
+
+  double progress() {
+    return this.finish / this.all;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,42 +33,44 @@ class QuizCardWidget extends StatelessWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 40,
-            width: 40,
-            child: Image.asset(AppImages.blocks),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Gerenciamento de Estado",
-            style: AppTextStyles.heading15,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "3 de 10",
-                  style: AppTextStyles.body11,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              child: Image.asset(AppImages.blocks),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              title,
+              style: AppTextStyles.heading15,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "$finish de $all",
+                    style: AppTextStyles.body11,
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: ProgressIndicationWidget(
-                  value: 0.3,
+                Expanded(
+                  flex: 1,
+                  child: ProgressIndicationWidget(
+                    value: finish / all,
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

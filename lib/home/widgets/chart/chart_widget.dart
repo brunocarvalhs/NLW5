@@ -3,7 +3,8 @@ import 'package:DevQuiz/core/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class ChartWidget extends StatelessWidget {
-  const ChartWidget({Key? key, double? percentage = 0.0}) : super(key: key);
+  final int percentage;
+  const ChartWidget({Key? key, required this.percentage}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +18,7 @@ class ChartWidget extends StatelessWidget {
               height: 80,
               child: CircularProgressIndicator(
                 strokeWidth: 10,
-                value: 0.75,
+                value: percentage / 100,
                 backgroundColor: AppColors.chartSecondary,
                 valueColor:
                     AlwaysStoppedAnimation<Color>(AppColors.chartPrimary),
@@ -26,7 +27,7 @@ class ChartWidget extends StatelessWidget {
           ),
           Center(
             child: Text(
-              "75%",
+              "$percentage%",
               style: AppTextStyles.heading,
             ),
           ),

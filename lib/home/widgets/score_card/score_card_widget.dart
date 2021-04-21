@@ -2,13 +2,10 @@ import 'package:DevQuiz/core/core.dart';
 import 'package:DevQuiz/home/widgets/chart/chart_widget.dart';
 import 'package:flutter/material.dart';
 
-class ScoreCardWidget extends StatefulWidget {
-  ScoreCardWidget({Key? key}) : super(key: key);
-  @override
-  _ScoreCardState createState() => _ScoreCardState();
-}
+class ScoreCardWidget extends StatelessWidget {
+  final int progress;
+  ScoreCardWidget({Key? key, this.progress = 0}) : super(key: key);
 
-class _ScoreCardState extends State<ScoreCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,7 +19,12 @@ class _ScoreCardState extends State<ScoreCardWidget> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(flex: 1, child: ChartWidget()),
+              Expanded(
+                flex: 1,
+                child: ChartWidget(
+                  percentage: progress,
+                ),
+              ),
               Expanded(
                 flex: 3,
                 child: Padding(
